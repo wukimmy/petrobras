@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
     <title>Petrobras</title>
+    <link rel="stylesheet" href="./css/style.css">
+
     <style>
       html, body {
         margin: 0;
@@ -26,17 +28,6 @@
         color: #fff;
       }
 
-      #desc-container {
-        max-width: 500px;
-        max-height: 500px;
-        min-width: 200px;
-        min-height: 250px;
-        background: #fff;
-        color: #000;
-        border-radius: 3px;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-      }
 
       #desc-container > iframe {
         border: none;
@@ -58,7 +49,7 @@
   <body>
 
     <div class="credit"><a href="https://devinhas.io">Devinhas</a> Devinhas Hackathon da Petrobras</div>
-    
+
     <div id="desc-container" style="display:none">
       <div class="title">Petrobras</div>
       <div class="text">Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</div>
