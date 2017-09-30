@@ -6,44 +6,6 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
     <title>Petrobras</title>
     <link rel="stylesheet" href="./css/style.css">
-
-    <style>
-      html, body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background-color: #000;
-      }
-
-      a:link, a:visited{
-        color: #bdc3c7;
-      }
-
-      .credit{
-        position: absolute;
-        text-align: center;
-        width: 100%;
-        padding: 20px 0;
-        color: #fff;
-      }
-
-
-      #desc-container > iframe {
-        border: none;
-        width:100%;
-      }
-
-      .title {
-        font-size: 1.5em;
-        text-align: center;
-        padding: 5px;
-      }
-
-      .text {
-        padding: 0 20px 20px 20px;
-      }
-    </style>
   </head>
 
   <body>
@@ -51,8 +13,11 @@
     <div class="credit"><a href="https://devinhas.io">Devinhas</a> Devinhas Hackathon da Petrobras</div>
 
     <div id="desc-container" style="display:none">
-      <div class="title">Petrobras</div>
-      <div class="text">Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</div>
+      <div class="info">
+        <div class="title">Arvore de Willian</div>
+        <p>Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</p>
+      </div>
+      <div class="text">imagem da árvore</div>
     </div>
 
        <script src="js/three/three.min.js"></script>
