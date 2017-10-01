@@ -76,3 +76,25 @@ a:link, a:visited{
 .tag{
   font-weight: 900;
 }
+
+nav{
+      margin-top: 20px;
+}
+
+nav ul{
+  width: 70%;
+margin: 0 auto;
+}
+
+nav ul li {
+  padding: 10px;
+  background-color: indigo;
+  margin-left: 10px;
+  display: inline;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+nav ul li:hover {
+  padding: 15px;
+}

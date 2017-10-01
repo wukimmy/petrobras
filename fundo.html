@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
-    <title>Sunset Menu</title>
+    <title>Panolens.js panorama ui</title>
     <style>
-      body {
+      html, body {
         margin: 0;
         width: 100%;
         height: 100%;
         overflow: hidden;
+        background-color: #000;
       }
 
       a:link, a:visited{
@@ -28,252 +29,88 @@
 
   <body>
 
+    <div class="credit"><a href="https://github.com/pchen66/panolens.js">Panolens.js</a> panorama ui example. Image from <a href="http://paulbourke.net/miscellaneous/">Paul Bourke</a></div>
 
-    
-    <script src="js/three/three.min.js"></script>
-    <script src="js/panolens/panolens.min.js"></script>
+    <script src="./js/three/three.min.js"></script>
+    <script src="./js/panolens/panolens.min.js"></script>
 
     <script>
 
-      var panorama, viewer, radius, zodiacs, zodiac, title, desc, egg, eggTexture, fromScale, toScale, duration, easing;
+      var panorama, viewer, title, paragraph, poster, banner, radius;
 
-      // information from http://iml.jou.ufl.edu/projects/fall07/Bhimani/thezodiac/zodiacsigns.html
-      // image asset from online source
-      zodiacs = [ 
-        { name: 'Aries',
-        panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v2.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'Aries is the first sign of the zodiac. Those who are Aries are independent and courageous. They enjoy leading others and bringing excitement into the lives of others. An Aries is enthusiastic and very goal-oriented.' }, 
-        { name: 'Taurus',  
-          panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v1.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'The second sign of the zodiac, those who are a Taurus are solid and fight for what they want. A Taurus is very easy going but can also be stubborn. A Taurus can be procrastinators but also have a good-work ethic.' },
-        { name: 'Gemini',  
-        panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v1.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'Gemini is the third sign of the zodiac. Geminis have many sides and are known for their energy. They are very talkative and are considered social butterflies. A Gemini will always take their lives in the direction they want to go.' },
-        { name: 'Cancer', 
-        panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v2.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          panorama: new PANOLENS.ImagePanorama('asset/textures/equirectangular/golf.jpg'), 
-          desc: 'Cancer is the fourth sign of the zodiac. This sign is marked by inconsistency. They enjoy security but also seek adventure. A Cancer is not very predictable and always keep others guessing.' },
-        { name: 'Leo',  
-        panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v1.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'Leo is the fifth sign in the zodiac. Leos have high self esteem and are very devoted. They are also very kind and generous. A Leo is known for being hot tempered yet forgiving.' },
-        { name: 'Virgo',
-          panorama: new PANOLENS.ImagePanorama('asset/textures/equirectangular/lamp.jpg'), 
-          desc: 'The sixth sign of the zodiac, Virgo is very mind oriented. They are constantly analyzing and thinking. They enjoy bettering themselves and those around them.' },
-        { name: 'Libra',  
-        panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v2.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'The seventh sign of the zodiac, Libras are known for their diplomatic nature. They get along well with everyone and are ambitious. They have very expensive taste and work hard to make money.' },
-        { name: 'Scorpius',
-          panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v1.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'The eight sign of the zodiac, Scorpios are very intense. They like to question everything and work hard at making sense of things. Scorpios treat others with kindness and loyalty.' },
-        { name: 'Sagittarius', 
-        panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v2.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'The ninth sign of the zodiac, a Sagittarius has a very positive outlook on life. They have vibrant personalities and enjoy meeting new people. They can also be reckless.' },
-        { name: 'Capricorn',
-          panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v1.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'The 10th sign of the zodiac, those who are Capricorns are marked by their ambitious nature. They have very active minds and always have to be in control of their lives.' },
-        { name: 'Aquarius',  
-        panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v1.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'Aquarius is the 11th sign of the zodiac. Aquarians don\'t always care what others think about them. They take each opportunity they have and work towards formulating new ideas.' },
-        { name: 'Pisces', 
-         panorama: new PANOLENS.VideoPanorama('http://sunsetdevs.herokuapp.com/asset/textures/v1.mp4', { autoplay: true,crossOrigin : "anonymous" }), 
-          desc: 'Pisces is the 12th and last sign of the zodiac. Those who are Pisces are extremely sensitive and reserved. They like to escape from reality. A Pisces is a very good listener and friend.' }
-      ];
-
-      radius = 180;
-      duration = 500;
-      easing = TWEEN.Easing.Elastic.Out;
-      fromScale = new THREE.Vector3( 1, 1.2, 1 );
-      toScale = fromScale.clone().multiplyScalar( 1.2 );
-      eggTexture = PANOLENS.Utils.TextureLoader.load( 'asset/textures/zodiac/1.png' );
-
-      viewer = new PANOLENS.Viewer( { enableReticle: true , horizontalView: false , controlBar: true} );
-     //viewer.enableControl(1);
-      viewer.enableEffect(3);
-     // panorama = new PANOLENS.BasicPanorama();
-     // panorama = new PANOLENS.EmptyPanorama();
-     panorama = new PANOLENS.ImagePanorama( 'asset/textures/costa-rica-beach-pano-01.jpg' );
-
-      viewer.add( panorama );
+      radius = 150;
 
       function onFontLoaded () {
 
-        for ( var i = 0, angle, zodiacPanorama; i < zodiacs.length; i++ ) {
+        var theta;
 
-          angle = Math.PI / 6 * i + Math.PI;
+        // Title text
+        title = new PANOLENS.SpriteText( 'PANOLENS.JS ', 430 );
+        title.rotation.y = Math.PI;
+        title.scale.multiplyScalar( 5 );
+        title.position.set( 0, 50, -100 );
 
-          zodiacPanorama = zodiacs[ i ].panorama;
+        // A 2d text paragraph
+        paragraph = new PANOLENS.SpriteText( [
 
-          // Zodiac eggs
-          egg = createEgg( angle );
+          "Lorem ipsum dolor sit amet, tempor fastidii adolescens eos id, idque melius option ad mea, ut nam sint lorem. Quo ad nulla inimicus pertinacia. Ex modo affert has, ea harum quidam evertitur pri. Suas summo alterum cum ea.\n",
 
-//scene.add(line);
+          "Ne usu ullum percipit, ne lobortis repudiare reprehendunt pri. Cum ex nihil fabellas intellegat, vel exerci nostro ad. Vis nulla pertinax ex, mel te esse omnesque adipisci. Odio libris eruditi id sea, aeterno persecuti ea qui, ea eleifend consulatu voluptatibus mea. An vim quis maiestatis, vis sumo insolens id, ius at meliore conceptam. Est eu brute solet, id nullam possit qui. Appareat temporibus qui ut.\n",
 
-          // Zodiac as infospots
-          zodiac = createZodiac( angle, i ) ;
 
-          // Zodiac title
-          title = createTitleAndDesc( angle, i );
+          "Ad vel choro copiosae, alii simul interesset te has, id verterem evertitur torquatos eos. Facilis mediocrem ad pro, ei eius aliquip suavitate mel. At ius tota nulla recteque. Vix omnes disputando cu, impetus admodum sea id. Eum tollit tractatos moderatius in, natum viderer in vis. Sea timeam consequat eu, eleifend maluisset instructior ut nec, viderer pertinax ne usu.\n",
 
-          // Create zodiac panorama if exists
-          if ( zodiacPanorama ) {
+          "Te homero essent reprehendunt usu, accusata sadipscing ex nec, an ius fugit dicant efficiantur. Nec ne mundi persius. Est ex inani audire tincidunt, ei ubique civibus aliquando sea, et bonorum repudiare eloquentiam est. Falli nonumy facilis ad sea, his et percipit singulis. Nostro deserunt theophrastus ex vix, his minim appetere expetenda ne.\n",
 
-            zodiacPanorama.position.set( - Math.random() * 100, 0, Math.random() * 100 );
-            zodiacPanorama.link( panorama, true ); // One way linking
+          "Pri menandri necessitatibus in, invidunt recteque honestatis sed at. Et quo mazim invidunt, ne eam diam atqui evertitur. Sed sint iisque appellantur eu, per stet adolescens te, id usu iisque noluisse. Ut mei modo malorum, id suscipit adolescens definitiones per."
 
-            zodiac.toPanorama = zodiacPanorama;
-            viewer.add( zodiacPanorama );
+        ].join('\n') );
 
-          }
+        paragraph.rotation.y = Math.PI / 2;
+        paragraph.position.set( 100, paragraph.getLayout().height / 2 * 0.05, 0 );
+        viewer.addUpdateCallback( function () {
 
-          zodiac.title = title;
-          zodiac.desc = title.desc;
-          egg.zodiac = zodiac;
-          
-         // panorama.add( egg );
-          panorama.add( title );
-          panorama.add( zodiac );
+          paragraph.rotation.y = Math.PI / 2 + Math.sin( Date.now() * 0.001 ) * Math.PI / 6;
+
+        } );
+
+        // Image poster with click listener
+        poster = new PANOLENS.Tile( 120, 60, 64, 64, new THREE.Vector3( 0, 0, 1 ), new THREE.Vector3( 0, 1, 0 ), Math.PI / 12 );
+        poster.position.set( 0, -20, -100 );
+        poster.addEventListener( 'click', function () {
+          this.material.color.set( Math.random() * 0xffffff );
+        } );
+
+        // Banners with hover listener
+        for ( var i = 0; i < 6; i++ ) {
+
+          theta = i * Math.PI * 2 / 6;
+          banner = new PANOLENS.Tile( 150, 20, 32, 32, new THREE.Vector3( 0, 0, 1 ), new THREE.Vector3( 0, 1, 0 ), Math.PI / 6 );
+          banner.position.set( radius * Math.sin( theta ), 100, radius * Math.cos( theta ) );
+          banner.lookAt( new THREE.Vector3( 0, banner.position.y, 0 ) );
+          banner.material.color.set( Math.random() * 0xffffff );
+          banner.tween( 'scale-up', banner.scale, { y: 2 }, 500, TWEEN.Easing.Bounce.Out );
+          banner.tween( 'scale-down', banner.scale, { y: 1 }, 500, TWEEN.Easing.Bounce.Out );
+          banner.addEventListener( 'hoverenter', function(){
+            this.tweens[ 'scale-up' ].start();
+          } );
+          banner.addEventListener( 'hoverleave', function(){
+            this.tweens[ 'scale-down' ].start();
+          } );
+          panorama.add( banner );
 
         }
 
-      }
-
-      function createEgg ( angle ) {
-
-        var mesh;
-
-        var square = new THREE.Geometry();
-        square.vertices.push(new THREE.Vector3(0, 0, 0));
-		square.vertices.push(new THREE.Vector3(0, 100, 0));
-		square.vertices.push(new THREE.Vector3(100, 100, 0));
-		square.vertices.push(new THREE.Vector3(100, 0, 0));
-
-		square.vertices.push(new THREE.Vector3(0, 0, 0));
-
-		square.faces.push(new THREE.Face3(0, 1, 2));
-		square.faces.push(new THREE.Face3(0, 3, 2));
-
-		//var line = new THREE.mesh(square, new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5 }));
-		mesh = new THREE.Mesh(square, new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5 }));
-
-        // Zodiac egg
-       /* mesh = new THREE.Mesh( 
-          new THREE.SphereGeometry( 20, 16, 12 ), 
-          new THREE.MeshBasicMaterial( { transparent: true, map: eggTexture } ) 
-        );*/
-        mesh.position.set( radius * Math.sin( -angle ), 0, radius * Math.cos( -angle ) );
-        mesh.scale.copy( fromScale );
-        mesh.lookAt( panorama.position );
-
-        // Egg animation
-        mesh.scaleUpAnimation = new TWEEN.Tween( mesh.scale )
-          .to( toScale, duration )
-          .easing( easing );
-        mesh.scaleDownAnimation = new TWEEN.Tween( mesh.scale )
-          .to( fromScale, duration)
-          .easing( easing );
-        mesh.vanishAnimation = new TWEEN.Tween( mesh.material )
-          .to( { opacity: 0 }, duration )
-          .easing( TWEEN.Easing.Cubic.Out )
-          .onComplete(function(){
-            this.visible = false;
-            this.zodiac.visible = true;
-            this.zodiac.animated = true;
-            this.zodiac.title.visible = true;
-          }.bind( mesh ) );
-
-        // Egg event listeners
-        mesh.addEventListener( 'hoverenter', function () {
-          this.scaleDownAnimation.stop();
-          this.scaleUpAnimation.start();
-        } );
-        mesh.addEventListener( 'hoverleave', function () {
-          this.scaleUpAnimation.stop();
-          this.scaleDownAnimation.start();
-        } );
-        mesh.addEventListener( 'click', function () {
-          this.vanishAnimation.start();
+        // Load image
+        PANOLENS.Utils.TextureLoader.load(
+          'asset/textures/equirectangular/field.jpg',
+          function ( texture ) {
+            poster.material.map = texture;
+            poster.material.needsUpdate = true;
         } );
 
-        // Egg auto rotation
-      /*  viewer.addUpdateCallback( function () {
-          this.rotation.y += 0.01;
-        }.bind( mesh ) );*/
-
-        return mesh;
-
-      }
-
-      function createZodiac ( angle, index ) {
-
-        var mesh, url;
-
-        url = 'asset/textures/zodiac/' + ( index + 1 ) + '.png';
-
-        mesh = new PANOLENS.Infospot( 50, url, false );
-        mesh.name = zodiacs[ index ].name;
-        mesh.position.set( radius * Math.sin( angle ), 0, radius * Math.cos( angle ) );
-        mesh.visible = true;
-
-            mesh.animated = true;
-           // mesh.title.visible = true;
-        mesh.setCursorHoverStyle( 'default' );
-
-        // Zodiac event listeners
-        mesh.addEventListener( 'hoverenter', function () {
-          // Dynamic set reticle dwelling time
-          this.name === 'Taurus' && setDwellTime( 3000 ); 
-          // Fade in description
-          this.desc.tweens['fadeIn'].start();
-        } );
-        mesh.addEventListener( 'hoverleave', function () {
-          // Reset reticle dwelling time
-          this.name === 'Taurus' && setDwellTime( 1500 ); 
-          // Fade out description
-          this.desc.tweens['fadeOut'].start();
-        } );
-        mesh.addEventListener( 'click', function () {
-          this.toPanorama && viewer.setPanorama( this.toPanorama );
-          this.scaleDownAnimation.start();
-        } );
-
-        return mesh;
-
-      }
-
-      function createTitleAndDesc ( angle, index ) {
-
-        var titleSprite, descSprite, name, description;
-
-        name = zodiacs[ index ].name;
-        description = zodiacs[ index ].desc;
-
-        // Zodiac title
-        titleSprite = new PANOLENS.SpriteText( name, name.length * 35 );
-        titleSprite.visible = false;
-        titleSprite.position.set( radius * Math.sin( -angle ), 0, radius * Math.cos( -angle ) );
-        titleSprite.position.y += 45;
-        titleSprite.rotation.y = -angle;
-        titleSprite.scale.multiplyScalar( 2 );
-
-        // Zodiac description
-        descSprite = new PANOLENS.SpriteText( description, 1000 );
-        descSprite.mesh.material.uniforms.opacity.value = 0;
-        descSprite.position.y = -42;
-        descSprite.scale.multiplyScalar( 0.5 );
-        descSprite.tween( 'fadeOut', descSprite.mesh.material.uniforms.opacity, { value: 0 }, 1000 );
-        descSprite.tween( 'fadeIn', descSprite.mesh.material.uniforms.opacity, { value: 1 }, 1000 );
-
-        titleSprite.add( descSprite );
-        titleSprite.desc = descSprite;
-
-        return titleSprite;
-
-      }
-
-      function setDwellTime ( time ) {
-
-        viewer.options.dwellTime = time;
-
+        // Add components
+        panorama.add( title, paragraph, poster );
       }
 
       // Load font with callback when font is ready
@@ -281,6 +118,11 @@
         font: 'asset/fnt/Lato-Regular-64.fnt',
         image: 'asset/fnt/lato.png'
       }, onFontLoaded);
+
+      panorama = new PANOLENS.BasicPanorama();
+
+      viewer = new PANOLENS.Viewer( { cameraFov: 80 } );
+      viewer.add( panorama );
 
     </script>
 

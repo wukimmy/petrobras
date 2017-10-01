@@ -11,8 +11,22 @@
 
 <body>
 
-  <div class="credit"><a href="https://devinhas.io">Devinhas</a> Devinhas Hackathon da Petrobras</div>
+  <div class="credit">
+    <a href="https://devinhas.io">Devinhas</a> Devinhas Hackathon da Petrobras
 
+    <nav>
+      <ul>
+        <li>Minhas arvores</li>
+        <li>Arvores do posto</li>
+        <li>Arvores dos amigos</li>
+        <li>Perfil</li>
+      </ul>
+    </nav>
+
+  </div>
+  <div class="minhas-arvores">
+    teste
+  </div>
   <div id="desc-container1" style="display:none">
     <div class="info">
       <div class="title">Arvore de Daniel</div>
@@ -84,10 +98,13 @@ infospot3.position.set( 3457.4, -3744.48, 1957.61 );
 infospot3.addHoverElement( document.getElementById( 'desc-container3' ), 200 );
 
 url = 'asset/textures/arvore3.png';
-
-infospot4 = new PANOLENS.Infospot( 550,  url );
+infospot4 = new PANOLENS.SpriteText('teste asdasdas', 500, '#333333');
 infospot4.position.set( 3457.4, -3730.48, 1926.61 );
-infospot4.addHoverElement( document.getElementById( 'desc-container4' ), 200 );
+// infospot4.addHoverElement( document.getElementById( 'desc-container4' ), 200 );
+
+
+infospot5 = new PANOLENS.createMainMenu({nome: 'teste'});
+
 
 //
 // url = 'asset/textures/arvore5.png';
@@ -109,6 +126,7 @@ panorama.add( infospot);
 panorama.add( infospot2 );
 panorama.add( infospot3 );
 panorama.add( infospot4 );
+panorama.add( infospot5 );
 // panorama.add( infospot5 );
 // panorama.add( infospot6 );
 
