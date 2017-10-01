@@ -6,7 +6,8 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
   <title>Petrobras</title>
   <link rel="stylesheet" href="./css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="./js/jquery.js"></script>
+  <link rel="stylesheet" href="./css/font-awesome.css">
 </head>
 
 <body>
@@ -16,13 +17,58 @@
 
     <nav>
       <ul>
-        <li>Minhas arvores</li>
+        <li class="minhas-arvores-menu">Minhas arvores</li>
         <li>Arvores do posto</li>
         <li>Arvores dos amigos</li>
-        <li>Perfil</li>
+        <li class="perfil-menu">Perfil</li>
       </ul>
     </nav>
+  </div>
+  <div class="minhas-arvores" style="display:none;">
+    <h1>Minhas árvores</h1>
+    <div class="list">
+      <ul>
+        <li>
+          <div class="icon">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore4.png" alt=""><span>nome da kimmy</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore3.png" alt=""><span>nome do vogel</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore1.png" alt=""><span>nome do daniel</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore2.png" alt=""><span>nome do willian</span>
+          </div>
+        </li>
+      </ul>
 
+    </div>
+  </div>
+
+  <div class="perfil" style="display:none;">
+    <h1>Perfil</h1>
+    <div class="list">
+      <div class="perfil-icon">
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+      </div>
+      <ul>
+        <li>Vogel</li>
+        <li>info</li>
+        <li>info</li>
+        <li>info</li>
+
+
+      </ul>
+
+    </div>
   </div>
 
   <div id="desc-container1" style="display:none">
@@ -113,21 +159,7 @@ url = 'asset/textures/arvore5.png';
 
 infospot4 = new PANOLENS.Infospot( 999,  url );
 infospot4.position.set( -300.4, -150, 2000.61 );
-infospot4.addHoverElement( document.getElementById( 'desc-container4' ), 200 );
-
-//
-// url = 'asset/textures/arvore5.png';
-//
-// infospot5 = new PANOLENS.Infospot( 550,  url );
-// infospot5.position.set( 3137.4, -3224.48, 1326.61 );
-// infospot5.addHoverText( 'Minha Linda Arove Nova sei 5' );
-//
-// url = 'asset/textures/arvore6.png';
-//
-// infospot6 = new PANOLENS.Infospot( 550,  url );
-// infospot6.position.set( 3237.4, -3124.48, 1126.61 );
-// infospot6.addHoverText( 'Minha Linda Arove Nova sei 6' );
-
+infospot4.addHoverElement( document.getElementById( 'desc-container5' ), 200 );
 
 // Get Google Map API Key - https://developers.google.com/maps/documentation/javascript/get-api-key
 panorama = new PANOLENS.GoogleStreetviewPanorama( 'kVyRpii1Y19GQeP_8RIEYg' );
@@ -135,11 +167,32 @@ panorama.add( infospot);
 panorama.add( infospot2 );
 panorama.add( infospot3 );
 panorama.add( infospot4 );
-// panorama.add( infospot5 );
-// panorama.add( infospot6 );
+
 
 viewer = new PANOLENS.Viewer();
 viewer.add( panorama );
+
+// $( document ).ready(function() {
+//     $('.minhas-arvores').css("display", "none");
+// });
+
+$('.minhas-arvores-menu').on('click', function(){
+  $('.minhas-arvores').toggleClass( "show" );
+
+  if($( ".perfil" ).hasClass("show")){
+    $( ".perfil" ).toggleClass( "show" );
+  }
+
+});
+$('.perfil-menu').on('click', function(){
+  $( ".perfil" ).toggleClass( "show" );
+
+  if($( ".minhas-arvores" ).hasClass("show")){
+    $( ".minhas-arvores" ).toggleClass( "show" );
+  }
+});
+
+
 
 </script>
 

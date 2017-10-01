@@ -78,17 +78,18 @@ a:link, a:visited{
 }
 
 nav{
-      margin-top: 20px;
+  margin-top: 20px;
 }
 
 nav ul{
   width: 70%;
-margin: 0 auto;
+  margin: 0 auto;
 }
 
 nav ul li {
+  border-radius: 10px;
   padding: 10px;
-  background-color: indigo;
+  background-color: #008222;
   margin-left: 10px;
   display: inline;
   font-size: 26px;
@@ -97,4 +98,72 @@ nav ul li {
 
 nav ul li:hover {
   padding: 15px;
+}
+
+.minhas-arvores, .perfil{
+  position: absolute;
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 794px;
+  min-height: 250px;
+  background: #000;
+  color: #fff;
+  border: solid 2px #000;
+  opacity: 0.8;
+  border-radius: 10px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  left: 309px;
+  top: 130px;
+  padding: 20px;
+  display: none;
+}
+
+.list{
+  padding: 20px;
+border-radius: 10px;
+background-color: #008222;
+}
+
+.minhas-arvores .list ul li{
+  display: block;
+  margin: 20px;
+}
+
+.minhas-arvores .list ul{
+  padding: 0px;
+}
+
+.perfil .list ul li{
+  display: block;
+  margin: 0px;
+  padding: 5px;
+}
+
+.perfil .list ul{
+  padding: 0px;
+
+}
+
+.icon img{
+  width: 50px;
+}
+
+.icon i{
+  background-color: black;
+padding: 10px;
+border-radius: 30px;
+vertical-align: bottom;
+margin-right: 5px;
+}
+.perfil-icon{
+  font-size: 72px;
+}
+
+.perfil .list ul{
+  margin: 0px;
+}
+
+.show{
+  display: block!important;
 }
