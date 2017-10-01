@@ -16,8 +16,8 @@
   <div id="desc-container1" style="display:none">
     <div class="info">
       <div class="title">Arvore de Daniel</div>
-      <p><span class="tag">Tipo: </span>Carvalho</p>
-      <p><span class="tag">Mensagem: </span>Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</p>
+      <p><span class="tag">Tipo: </span>Pau-Brasil</p>
+      <p><span class="tag">Mensagem: </span>A ansiedade dos portugueses para saber em detalhes as fantásticas riquezas que poderiam explorar, foi saciada quando Américo Vespúcio, integrante da expedição comandada por Gaspar Lemos em 1.501, trouxe a boa notícia da existência de grande quantidade de pau-brasil nas costas do novo mundo.</p>
     </div>
     <div class="text">
       <img src="./asset/textures/Arvore1.png" alt="">
@@ -27,8 +27,8 @@
   <div id="desc-container2" style="display:none">
     <div class="info">
       <div class="title">Arvore de Willian</div>
-      <p><span class="tag">Tipo: </span>Carvalho</p>
-      <p><span class="tag">Mensagem: </span>Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</p>
+      <p><span class="tag">Tipo: </span>Sibipuruna</p>
+      <p><span class="tag">Mensagem: </span>Árvore grande e frondosa, a Sibipiruna (Caesalpinia peltophoroides) existe com mais intensidade no litoral entre a Bahia e o Rio de Janeiro. Ela produz grande quantidade de flores e foi difundida no país por D.João VI, que a introduziu no Jardim Botânico do Rio de Janeiro.</p>
     </div>
     <div class="text">
       <img src="./asset/textures/Arvore2.png" alt="">
@@ -37,8 +37,8 @@
   <div id="desc-container3" style="display:none">
     <div class="info">
       <div class="title">Arvore de Voguel</div>
-      <p><span class="tag">Tipo: </span>Carvalho</p>
-      <p><span class="tag">Mensagem: </span>Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</p>
+      <p><span class="tag">Tipo: </span>Embaúba</p>
+      <p><span class="tag">Mensagem: </span>Encontradas na Mata Atlântica e em outros locais no país, as embaúbas são árvores de porte médio, com caule reto e ramificação apenas na porção superior. As folhas são grandes, muito lobadas, verde-claras na parte superior e verde-prateadas na inferior. As flores pequenas reúnem-se em pseudo-espigas e os frutinhos que ali se desenvolvem são utilizados como alimento para vários animais.</p>
     </div>
     <div class="text">
       <img src="./asset/textures/Arvore3.png" alt="">
