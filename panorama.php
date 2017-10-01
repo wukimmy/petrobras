@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html ng-app="sampleApp">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
@@ -8,6 +8,36 @@
   <link rel="stylesheet" href="./css/style.css">
   <script src="./js/jquery.js"></script>
   <link rel="stylesheet" href="./css/font-awesome.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDnsrFKJ00l3vye_AGwVt9womLPJGx51As",
+    authDomain: "chatsocket-2626b.firebaseapp.com",
+    databaseURL: "https://chatsocket-2626b.firebaseio.com",
+    projectId: "chatsocket-2626b",
+    storageBucket: "chatsocket-2626b.appspot.com",
+    messagingSenderId: "1075121073644"
+  };
+
+  firebase.initializeApp(config);
+
+  var app = angular.module("sampleApp", ["firebase"]);
+app.controller("SampleCtrl", function($scope, $firebaseArray) {
+  var ref = firebase.database().ref().child("arvores");
+  // create a synchronized array
+  $scope.arvores = $firebaseArray(ref);
+});
+  </script>
 </head>
 
 <body>
@@ -44,9 +74,9 @@
   </div>
   <div id="desc-container4" style="display:none">
     <div class="info">
-      <div class="title">Arvore de Kimmy</div>
-      <p><span class="tag">Tipo: </span>Carvalho</p>
-      <p><span class="tag">Mensagem: </span>Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</p>
+      <div class="title">Arvore da Alice</div>
+      <p><span class="tag">Tipo: </span>Embaúba</p>
+      <p><span class="tag">Mensagem: </span>Encontradas na Mata Atlântica e em outros locais no país, as embaúbas são árvores de porte médio, com caule reto e ramificação apenas na porção superior.</p>
     </div>
     <div class="text">
       <img src="./asset/textures/Arvore4.png" alt="">

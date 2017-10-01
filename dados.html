@@ -1,0 +1,287 @@
+<html ng-app="sampleApp">
+<head>
+	<title>Criar Arvore</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDnsrFKJ00l3vye_AGwVt9womLPJGx51As",
+    authDomain: "chatsocket-2626b.firebaseapp.com",
+    databaseURL: "https://chatsocket-2626b.firebaseio.com",
+    projectId: "chatsocket-2626b",
+    storageBucket: "chatsocket-2626b.appspot.com",
+    messagingSenderId: "1075121073644"
+  };
+  firebase.initializeApp(config);
+
+  var app = angular.module("sampleApp", ["firebase"]);
+app.controller("SampleCtrl", function($scope, $firebaseArray) {
+  var ref = firebase.database().ref().child("arvores");
+  // create a synchronized array
+  $scope.arvores = $firebaseArray(ref);
+  // add new items to the array
+  // the arvore is automatically added to our Firebase database!
+  $scope.addArvore = function() {
+    $scope.arvores.$add({
+      nome: $scope.newMessageText,
+      tipo: $scope.newMessageText
+
+      });
+  };
+
+
+   var ref = firebase.database().ref().child("midias");
+      $scope.midias = $firebaseArray(ref);
+
+
+      try {
+          $scope.logado = JSON.parse(localStorage.getItem('user_logado' ) );
+      }
+      catch(err) {
+          $scope.logado = null;
+      }
+
+
+      $scope.addMidia = function() {
+        $scope.midias.$add({
+          image: canvas.toDataURL(),
+          createdAt: firebase.database.ServerValue.TIMESTAMP ,
+          user:'82629233826'
+        });
+        alert("sua imagem foi salva");
+        canvas.width = canvas.width;
+      };
+
+
+
+      $scope.limpar = function() {
+        canvas.width = canvas.width;
+      };
+
+    $scope.eraser = function (){
+    var canvas = document.getElementById("sig-canvas");
+      var context = canvas.getContext("2d");
+      context.globalCompositeOperation = "copy";
+      context.lineWidth = 5;
+      context.strokeStyle="Orange";
+      context.stroke();
+    }
+
+
+    $scope.pen = function (){
+      context.strokeStyle = "#222222";
+      context.globalCompositeOperation = "copy";
+    }
+
+
+    $scope.seleciona_tipo = function (){
+    	if($scope.tipos == 'p'){
+    		$scope.desenha = true;
+    	}else{
+    		$scope.desenha = false;
+    		$scope.img_arvore = 'asset/textures/Arvore'+$scope.tipos+'.png';
+    	}
+
+    }
+
+
+      var canvas = document.getElementById("sig-canvas");
+      var ctx = canvas.getContext("2d");
+      ctx.strokeStyle = "#222222";
+      ctx.lineWith = 2;
+
+
+      var drawing = false;
+      var mousePos = { x:0, y:0 };
+      var lastPos = mousePos;
+      canvas.addEventListener("mousedown", function (e) {
+              drawing = true;
+        lastPos = getMousePos(canvas, e);
+      }, false);
+      canvas.addEventListener("mouseup", function (e) {
+        drawing = false;
+      }, false);
+      canvas.addEventListener("mousemove", function (e) {
+        mousePos = getMousePos(canvas, e);
+      }, false);
+
+      // Get the position of the mouse relative to the canvas
+      function getMousePos(canvasDom, mouseEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+        return {
+          x: mouseEvent.clientX - rect.left,
+          y: mouseEvent.clientY - rect.top
+        };
+      }
+
+
+      window.requestAnimFrame = (function (callback) {
+              return window.requestAnimationFrame ||
+                 window.webkitRequestAnimationFrame ||
+                 window.mozRequestAnimationFrame ||
+                 window.oRequestAnimationFrame ||
+                 window.msRequestAnimaitonFrame ||
+                 function (callback) {
+              window.setTimeout(callback, 1000/60);
+                 };
+      })();
+
+
+      function renderCanvas() {
+        if (drawing) {
+          ctx.moveTo(lastPos.x, lastPos.y);
+          ctx.lineTo(mousePos.x, mousePos.y);
+          ctx.stroke();
+          lastPos = mousePos;
+        }
+      }
+
+      // Allow for animation
+      (function drawLoop () {
+        requestAnimFrame(drawLoop);
+        renderCanvas();
+      })();
+
+
+      canvas.addEventListener("touchstart", function (e) {
+              mousePos = getTouchPos(canvas, e);
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+      }, false);
+
+      canvas.addEventListener("touchend", function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+      }, false);
+
+      canvas.addEventListener("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+      }, false);
+
+      // Get the position of a touch relative to the canvas
+      function getTouchPos(canvasDom, touchEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+        return {
+          x: touchEvent.touches[0].clientX - rect.left,
+          y: touchEvent.touches[0].clientY - rect.top
+        };
+      }
+
+      document.body.addEventListener("touchstart", function (e) {
+        if (e.target == canvas) {
+          e.preventDefault();
+        }
+      }, false);
+      document.body.addEventListener("touchend", function (e) {
+        if (e.target == canvas) {
+          e.preventDefault();
+        }
+      }, false);
+      document.body.addEventListener("touchmove", function (e) {
+        if (e.target == canvas) {
+          e.preventDefault();
+        }
+      }, false);
+
+      function limpar() {
+          canvas.width = canvas.width;
+      }
+      function salvar() {
+
+          try {
+            var imgs = JSON.parse(localStorage.getItem('images'));
+              console.log(imgs);
+          }
+          catch(err) {
+              console.log(err);
+          }
+
+          if(imgs == null){
+              imgs = [];
+          }
+
+
+          var dataUrl = canvas.toDataURL();
+          console.log(dataUrl);
+
+
+          var imagem = {"data":"1212121" , "img_bin" : dataUrl};
+          imgs.push(imagem);
+
+          localStorage.setItem('images', JSON.stringify(imgs));
+
+          canvas.width = canvas.width;
+      }
+
+
+  // click on `index.html` above to see $remove() and $save() in action
+});
+</script>
+
+</head>
+
+  <body ng-controller="SampleCtrl">
+
+    <!-- push a new message onto the array -->
+    <div class="alert alert-success">
+  		<img src="https://ouvidoria.petrobras.com.br/petrobras/portal/rj/ouvidoria/imagens/logo-petrobras.png">
+  		<strong> area para personalizar a sua arvore</strong>
+	</div>
+    <div class="container">
+	    <form class="form-horizontal" ng-submit="addArvore()">
+	      <input ng-model="newMessageText" placeholder="Digite o nome da arvore" />
+
+	      <select class="btn btn-success" ng-change="seleciona_tipo()" ng-model="tipos">
+	      	<option value="1">Pau-Brasil</option>
+	      	<option value="2">Saboia</option>
+	      	<option value="3">Ype</option>
+	      	<option value="4">Carvalho</option>
+	      	<option value="p">Personalizado</option>
+	      </select>
+
+	      <button class="btn btn-success" type="submit">Adicionar arvore</button>
+	    </form>
+	    <br/>
+    	<br/>
+    	<div class="jumbotron" ng-show="desenha">
+	    	<h1><button class="btn btn-warning" 	ng-click="limpar()">
+				  Limpar
+			</button>
+			</h1>
+
+	    	<canvas id="sig-canvas" width="800" height="520" >
+			Não funciona aqui
+			</canvas>
+		</div>
+		<div ng-hide="desenha"><img ng-src="{{img_arvore}}"></div>
+	</div>
+		<div class="panel-footer" style="background-color: #FFFFFF">
+			<div class="container">
+				<img src="https://elomilhas.com.br/wp-content/uploads/2017/07/petrobras-premmia.png" style="height: 100px">
+				<img src="https://ouvidoria.petrobras.com.br/petrobras/portal/rj/ouvidoria/imagens/logo-petrobras.png">
+				<img src="http://hotsitesbr.com.br/hackathon/wp-content/themes/petrobrasHackathon/library/images/logo-instrucoes.png" style="height: 80px">
+
+			</div>
+		</div>
+
+  </body>
+</html>
+</body>
+</html>
