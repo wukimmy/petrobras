@@ -11,66 +11,6 @@
 </head>
 
 <body>
-
-  <div class="credit">
-    <a href="https://devinhas.io">Devinhas</a> Devinhas Hackathon da Petrobras
-
-    <nav>
-      <ul>
-        <li class="minhas-arvores-menu">Minhas arvores</li>
-        <li>Arvores do posto</li>
-        <li>Arvores dos amigos</li>
-        <li class="perfil-menu">Perfil</li>
-      </ul>
-    </nav>
-  </div>
-  <div class="minhas-arvores" style="display:none;">
-    <h1>Minhas árvores</h1>
-    <div class="list">
-      <ul>
-        <li>
-          <div class="icon">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore4.png" alt=""><span>nome da kimmy</span>
-          </div>
-        </li>
-        <li>
-          <div class="icon">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore3.png" alt=""><span>nome do vogel</span>
-          </div>
-        </li>
-        <li>
-          <div class="icon">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore1.png" alt=""><span>nome do daniel</span>
-          </div>
-        </li>
-        <li>
-          <div class="icon">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><img src="./asset/textures/Arvore2.png" alt=""><span>nome do willian</span>
-          </div>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-
-  <div class="perfil" style="display:none;">
-    <h1>Perfil</h1>
-    <div class="list">
-      <div class="perfil-icon">
-        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-      </div>
-      <ul>
-        <li>Vogel</li>
-        <li>info</li>
-        <li>info</li>
-        <li>info</li>
-
-
-      </ul>
-
-    </div>
-  </div>
-
   <div id="desc-container1" style="display:none">
     <div class="info">
       <div class="title">Arvore de Daniel</div>
@@ -96,7 +36,7 @@
     <div class="info">
       <div class="title">Arvore de Voguel</div>
       <p><span class="tag">Tipo: </span>Embaúba</p>
-      <p><span class="tag">Mensagem: </span>Encontradas na Mata Atlântica e em outros locais no país, as embaúbas são árvores de porte médio, com caule reto e ramificação apenas na porção superior. As folhas são grandes, muito lobadas, verde-claras na parte superior e verde-prateadas na inferior. As flores pequenas reúnem-se em pseudo-espigas e os frutinhos que ali se desenvolvem são utilizados como alimento para vários animais.</p>
+      <p><span class="tag">Mensagem: </span>Encontradas na Mata Atlântica e em outros locais no país, as embaúbas são árvores de porte médio, com caule reto e ramificação apenas na porção superior.</p>
     </div>
     <div class="text">
       <img src="./asset/textures/Arvore3.png" alt="">
@@ -112,7 +52,7 @@
       <img src="./asset/textures/Arvore4.png" alt="">
     </div>
   </div>
-   <div id="desc-container5" style="display:none">
+  <div id="desc-container5" style="display:none">
     <div class="info">
       <div class="title">Arvore de Tomé</div>
       <p><span class="tag">Tipo: </span>Samambaia</p>
@@ -122,6 +62,7 @@
       <img src="./asset/textures/Arvore5.png" alt="">
     </div>
   </div>
+
 </div>
 
 <script src="js/three/three.min.js"></script>
@@ -129,7 +70,7 @@
 
 <script>
 
-var infospot, infospot2, panorama, viewer;
+var infospot, infospot2, infospot3, infospot4, infospot5, panorama, viewer, posterInfospot;
 url = 'asset/textures/arvore1.png';
 
 infospot = new PANOLENS.Infospot( 999,  url );
@@ -157,9 +98,9 @@ infospot4.addHoverElement( document.getElementById( 'desc-container4' ), 200 );
 
 url = 'asset/textures/arvore5.png';
 
-infospot4 = new PANOLENS.Infospot( 999,  url );
-infospot4.position.set( -300.4, -150, 2000.61 );
-infospot4.addHoverElement( document.getElementById( 'desc-container5' ), 200 );
+infospot5 = new PANOLENS.Infospot( 999,  url );
+infospot5.position.set( -300.4, -150, 2000.61 );
+infospot5.addHoverElement( document.getElementById( 'desc-container5' ), 200 );
 
 // Get Google Map API Key - https://developers.google.com/maps/documentation/javascript/get-api-key
 panorama = new PANOLENS.GoogleStreetviewPanorama( 'kVyRpii1Y19GQeP_8RIEYg' );

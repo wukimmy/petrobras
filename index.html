@@ -1,78 +1,34 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
-    <title>Petrobras</title>
-  </head>
-
-  <body>
-
-    <div class="credit"><a href="https://devinhas.io">Devinhas</a> Devinhas Hackathon da Petrobras</div>
-
-    <div id="desc-container" style="display:none">
-      <div class="title">Petrobras</div>
-      <div class="text">Agora a Petrobras e você vamos ajudar o planeta , pq as arvores , somo nozes</div>
+<head>
+  <meta charset="utf-8">
+  <title>Petrobras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="./favicon-32x32.png">
+  <meta name="theme-color" content="#e60042">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/custom.css">
+  <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+  <header>
+    <div class="logo">
+      <img class="logo-full" src="./img/logo.png" alt="ad.ez">
+      <img class="logo-mobile" src="./img/logo-mobile.png" alt="ad.ez">
     </div>
-
-       <script src="js/three/three.min.js"></script>
-    <script src="js/panolens/panolens.min.js"></script>
-
-    <script>
-
-      var infospot, infospot2, panorama, viewer;
-      url = 'asset/textures/arvore1.png';
-
-      infospot = new PANOLENS.Infospot( 900,  url );
-      infospot.position.set( 3957.4, -744.48, 2956.61 );
-      infospot.addHoverText( 'Minha Linda Arove Nova' );
-
-      url = 'asset/textures/arvore2.png';
-
-      infospot2 = new PANOLENS.Infospot( 550, url );
-      infospot2.position.set( -4720.82, -1606.57, -224.71 );
-      infospot2.addHoverElement( document.getElementById( 'desc-container' ), 200 );
+    <div id="responsive-menu" class="menu fa"></div>
+    <nav class="nav">
+      <ul>
+        <li><a href="minhas-arvores.html">Minhas árvores</a><img src="./img/menu-line.png"></li>
+        <li><a href="panorama.php">Árvores do posto</a><img src="./img/menu-line.png"></li>
+        <li><a href="perfil.html">Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
 
 
-      url = 'asset/textures/arvore3.png';
-
-      infospot3 = new PANOLENS.Infospot( 550,  url );
-      infospot3.position.set( 3457.4, -3744.48, 1956.61 );
-      infospot3.addHoverText( 'Minha Linda Arove Nova sei 3' );
-
-      url = 'asset/textures/arvore4.png';
-
-      infospot4 = new PANOLENS.Infospot( 550,  url );
-      infospot4.position.set( 3437.4, -3724.48, 1926.61 );
-      infospot4.addHoverText( 'Minha Linda Arove Nova sei 4' );
-
-
-      url = 'asset/textures/arvore5.png';
-
-      infospot5 = new PANOLENS.Infospot( 550,  url );
-      infospot5.position.set( 3137.4, -3224.48, 1326.61 );
-      infospot5.addHoverText( 'Minha Linda Arove Nova sei 5' );
-
-      url = 'asset/textures/arvore6.png';
-
-      infospot6 = new PANOLENS.Infospot( 550,  url );
-      infospot6.position.set( 3237.4, -3124.48, 1126.61 );
-      infospot6.addHoverText( 'Minha Linda Arove Nova sei 6' );
-
-
-      // Get Google Map API Key - https://developers.google.com/maps/documentation/javascript/get-api-key
-      panorama = new PANOLENS.GoogleStreetviewPanorama( 'kVyRpii1Y19GQeP_8RIEYg' );
-      panorama.add( infospot );
-      panorama.add( infospot2 );
-      panorama.add( infospot3 );
-      panorama.add( infospot4 );
-      panorama.add( infospot5 );
-      panorama.add( infospot6 );
-
-      viewer = new PANOLENS.Viewer();
-      viewer.add( panorama );
-
-    </script>
-
-  </body>
+  <script src="./js/main.js" charset="utf-8"></script>
+</body>
+</html>
