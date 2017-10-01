@@ -67,26 +67,26 @@ var infospot, infospot2, panorama, viewer;
 url = 'asset/textures/arvore1.png';
 
 infospot = new PANOLENS.Infospot( 550,  url );
-infospot.position.set( 3957.4, -744.48, 2956.61 );
+infospot.position.set( 500.4, -344.48, 2856.61 );
 infospot.addHoverElement( document.getElementById( 'desc-container1' ), 200 );
 
 url = 'asset/textures/arvore2.png';
 
 infospot2 = new PANOLENS.Infospot( 550, url );
-infospot2.position.set( -4720.82, -1606.57, -224.71 );
+infospot2.position.set(0.4, -500, 2900.61 );
 infospot2.addHoverElement( document.getElementById( 'desc-container2' ), 200 );
 
 
 url = 'asset/textures/arvore3.png';
 
 infospot3 = new PANOLENS.Infospot( 550,  url );
-infospot3.position.set( 3457.4, -3744.48, 1957.61 );
+infospot3.position.set( 200, -310.48, 2856.61 );
 infospot3.addHoverElement( document.getElementById( 'desc-container3' ), 200 );
 
 url = 'asset/textures/arvore3.png';
 
 infospot4 = new PANOLENS.Infospot( 550,  url );
-infospot4.position.set( 3457.4, -3730.48, 1926.61 );
+infospot4.position.set( -850.4, -200, 2900.61 );
 infospot4.addHoverElement( document.getElementById( 'desc-container4' ), 200 );
 
 //
