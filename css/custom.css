@@ -190,7 +190,7 @@ header{
   top: 10px;
   font-size: 30px!important;
   border: 1px solid #008222;
-  background: #008222;
+  background: #22b749;
   color: #fff;
   padding: 3px 5px;
   border-radius: 3px;
@@ -222,7 +222,7 @@ nav ul li a{
 }
 
 nav ul li a:hover{
-  color: #e60042;
+  color: #22b749;
 }
 
 nav ul li img{
@@ -493,18 +493,18 @@ input:focus, textarea:focus {
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   /*border-radius: 10px;*/
-  background-color: #F5F5F5;
+  background-color: #22b749;
 }
 
 ::-webkit-scrollbar
 {
   width: 12px;
-  background-color: #F5F5F5;
+  background-color: #22b749;
 }
 
 ::-webkit-scrollbar-thumb
 {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #e60042;
+  background-color: #22b749;
 }
