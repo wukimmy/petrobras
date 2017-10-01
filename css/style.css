@@ -1,3 +1,12 @@
+@font-face {
+  font-family: roboto;
+  src: url(../font/roboto.woff);
+}
+
+body{
+  font-family: roboto;
+}
+
 html, body {
   margin: 0;
   width: 100%;
@@ -18,7 +27,7 @@ a:link, a:visited{
   color: #fff;
 }
 
-#desc-container {
+#desc-container1, #desc-container2, #desc-container3, #desc-container4 {
   max-width: 500px;
   max-height: 500px;
   min-width: 200px;
@@ -32,22 +41,38 @@ a:link, a:visited{
   -webkit-overflow-scrolling: touch;
 }
 
-#desc-container > iframe {
+#desc-container1 > iframe, #desc-container2 > iframe, #desc-container3 > iframe, #desc-container3 > iframe {
   border: none;
   width:100%;
 }
 
 .title {
   font-size: 1.5em;
-  text-align: center;
-  padding: 5px;
+  margin-bottom: 10px;
+  color: #76b72b;
 }
 
 .text {
   padding: 0 20px 20px 20px;
+  float: right;
+  width: 40%;
+}
+
+.text img{
+  width: 100%;
 }
 
 .info{
   float: left;
-    margin: 20px;
+  margin: 20px;
+  width: 40%;
+  line-height: 24px;
+}
+
+.info p {
+  margin: 10px 0px;
+}
+
+.tag{
+  font-weight: 900;
 }
